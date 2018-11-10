@@ -5,7 +5,7 @@
 
 @desktop @mobile
 Scenario: Search for company information 
-	Given I am on the KvK homepage
+	Given I am on the KvK search page
 	When I search for company "Westerhout IT"
 	Then I should see the trade name "Westerhout IT" displayed
 
