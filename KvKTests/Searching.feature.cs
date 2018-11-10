@@ -80,22 +80,43 @@ namespace KvKTests
         [Xunit.FactAttribute(DisplayName="Search for company information")]
         [Xunit.TraitAttribute("FeatureTitle", "Searching")]
         [Xunit.TraitAttribute("Description", "Search for company information")]
-        [Xunit.TraitAttribute("Category", "desktop")]
-        [Xunit.TraitAttribute("Category", "mobile")]
         public virtual void SearchForCompanyInformation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for company information", null, new string[] {
-                        "desktop",
-                        "mobile"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for company information", null, ((string[])(null)));
 #line 7
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 8
  testRunner.Given("I am on the KvK search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.When("I search for company \"Westerhout IT\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I search for \"Westerhout IT\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
  testRunner.Then("I should see the trade name \"Westerhout IT\" displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.TheoryAttribute(DisplayName="Search using a filter")]
+        [Xunit.TraitAttribute("FeatureTitle", "Searching")]
+        [Xunit.TraitAttribute("Description", "Search using a filter")]
+        [Xunit.InlineDataAttribute("Handelsregister", "8800", new string[0])]
+        [Xunit.InlineDataAttribute("Informatie & advies", "1420", new string[0])]
+        [Xunit.InlineDataAttribute("Bijeenkomsten en groeikansen", "18", new string[0])]
+        [Xunit.InlineDataAttribute("Documenten en formulieren", "129", new string[0])]
+        public virtual void SearchUsingAFilter(string filter, string results, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search using a filter", null, exampleTags);
+#line 13
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 14
+ testRunner.Given("I am on the KvK search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 15
+ testRunner.When("I search for \"Ondernemer\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
+ testRunner.And(string.Format("I apply filter \"{0}\"", filter), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 17
+ testRunner.Then(string.Format("I should see \"{0}\" results", results), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

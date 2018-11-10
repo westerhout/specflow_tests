@@ -16,22 +16,22 @@ namespace KvKTests
         [Given(@"I am on the KvK search page")]
         public void GivenIAmOnTheKvKHomepage()
         {
+
             _driver = new ChromeDriver();
+
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
             _driver.Manage().Window.Maximize();
 
-            //_driver.Navigate().GoToUrl("https://www.kvk.nl/");
             _searchPage = SearchPage.NavigateTo(_driver);
 
             Assert.Equal("Zoeken", _driver.Title);  
+
         }
 
-        [When(@"I search for company ""(.*)""")]
+        [When(@"I search for ""(.*)""")]
         public void WhenISearchForCompany(string companyName)
         {
-            //IWebElement searchInput = _driver.FindElement(By.Id("q"));
-            //searchInput.SendKeys(companyName);         
 
             _searchPage.Search = companyName;
            
@@ -40,16 +40,34 @@ namespace KvKTests
         [Then(@"I should see the trade name ""(.*)"" displayed")]
         public void ThenIShouldSeeTheTradeNameDisplayed(string name)
         {
-            //IWebElement tradeNameP = _driver.FindElement(By.CssSelector("#js-search-results .more-search-info p"));
-            //string tradeName = tradeNameP.Text;
 
             Assert.Equal(name, _searchPage.TradeName);
+
         }
+
+        [When(@"I apply filter ""(.*)""")]
+        public void WhenIApplyFilter(string filterName)
+        {
+
+            _searchPage.SelectFilter(filterName);
+
+        }
+
+        [Then(@"I should see ""(.*)"" results")]
+        public void ThenIShouldSeeResults(string count)
+        {
+
+            Assert.Equal(count, _searchPage.CountResults);
+
+        }
+
 
         [AfterScenario]
         public void DisposeWebdriver()
         {
+
             _driver.Dispose();
+
         }
 
     }
